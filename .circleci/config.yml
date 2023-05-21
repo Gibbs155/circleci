@@ -5,7 +5,7 @@ jobs:
     docker:
       - image: cimg/base:stable
     steps:
-      - run:  hola
+      - run: echo hola
 
   despidete:
     docker:
@@ -26,3 +26,13 @@ workflows:
       - despidete:
           requires:
             - saluda
+  workflow3:
+    jobs:
+      - saluda
+      - approval:
+          type: approval
+          requires:
+            - saluda
+      - despidete:
+          requires:
+            - approval
